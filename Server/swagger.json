@@ -1,0 +1,81 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Login Server",
+    "description": "Server for user login",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user/authenticate": {
+      "post": {
+        "summary": "Authenticate a user",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Username and password of user to be authenticated",
+            "schema": {
+              "$ref": "#/definitions/User to be Authenticated"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is authenticated",
+            "schema": {
+              "$ref": "#/definitions/Authenticated User"
+            }
+          },
+          "500": {
+            "description": "Incorrect Username or Password"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User to be Authenticated": {
+      "required": ["user", "password"],
+      "properties": {
+        "user": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Authenticated User": {
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "username": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
